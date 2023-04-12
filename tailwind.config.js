@@ -7,6 +7,9 @@ module.exports = {
   ],
   ontent: [],
   theme: {
+    fontFamily: {
+      sans: 'CircularSP'
+    },
     extend: {},
   },
   plugins: [],
