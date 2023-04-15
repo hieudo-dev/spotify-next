@@ -69,7 +69,7 @@ export default function Navigation() {
       </a>
       <ul className="px-2 mb-6">
         {links.map(({ path, label, Icon }) => (
-          <li className="px-4 py-2">
+          <li key={path} className="px-4 py-2">
             <Link
               href={path}
               draggable="false"
@@ -87,7 +87,7 @@ export default function Navigation() {
 
       <ul className="px-2">
         {libraryLinks.map(({ path, label, Icon, className }) => (
-          <li className="px-4 py-2">
+          <li key={path} className="px-4 py-2">
             <Link
               href={path}
               draggable="false"
@@ -113,7 +113,10 @@ export default function Navigation() {
       <div className="flex-1 p-2 overflow-auto scrollbar">
         <ul>
           {playlists.map(({ id, name, description }) => (
-            <li className="px-4 py-2 text-sm font-light transition-opacity opacity-70 hover:opacity-100">
+            <li
+              key={id}
+              className="px-4 py-2 text-sm font-light transition-opacity opacity-70 hover:opacity-100"
+            >
               {name}
             </li>
           ))}
