@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
 import "styles/globals.css";
+import Header from "components/Header";
 import Navigation from "components/Navigation";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -8,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="flex flex-1 h-[calc(100%-88px)]">
         <Navigation />
         <div className="w-full bg-slate-950">
-          <header className="p-2">Header</header>
+          <Header />
           <main className="flex-1 p-2">
             <Component {...pageProps} />
           </main>
