@@ -11,6 +11,12 @@ import SpotifyLogo from "../public/icons/spotify.svg";
 
 export default function Navigation() {
   const router = useRouter();
+  const playlists = Array.from(Array(20).keys()).map((_, index) => ({
+    id: index,
+    name: "Your Top Songs 2022 " + (index + 1),
+    description: "New music for you",
+  }));
+
   const links = useMemo(
     () => [
       {
@@ -57,7 +63,7 @@ export default function Navigation() {
   );
 
   return (
-    <nav className="pt-6 w-80">
+    <nav className="flex flex-col pt-6 b-white w-80">
       <a className="block mx-6 mb-6 text-white" href="/">
         <SpotifyLogo className="h-[50px] w-40" />
       </a>
@@ -68,7 +74,7 @@ export default function Navigation() {
               href={path}
               draggable="false"
               className={
-                "flex items-center transition-opacity hover:opacity-100 " +
+                "flex items-center text-sm transition-opacity hover:opacity-100 " +
                 (router.pathname === path ? "opacity-100" : "opacity-70")
               }
             >
@@ -86,7 +92,7 @@ export default function Navigation() {
               href={path}
               draggable="false"
               className={
-                "flex items-center transition-opacity opacity-70 hover:opacity-100 " +
+                "flex items-center text-sm font-normal transition-opacity hover:opacity-100 " +
                 (router.pathname === path ? "opacity-100" : "opacity-70")
               }
             >
@@ -98,6 +104,21 @@ export default function Navigation() {
           </li>
         ))}
       </ul>
+
+      <div className="relative z-10 px-6 pt-3">
+        <hr className="border-gray-700" />
+        <div className="absolute left-3 right-3 h-5 bg-gradient-to-b from-[rgba(0,0,0,0.9)] to-[transparent]"></div>
+      </div>
+
+      <div className="flex-1 p-2 overflow-auto scrollbar">
+        <ul>
+          {playlists.map(({ id, name, description }) => (
+            <li className="px-4 py-2 text-sm font-light transition-opacity opacity-70 hover:opacity-100">
+              {name}
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 }

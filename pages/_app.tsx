@@ -4,10 +4,10 @@ import Navigation from "components/Navigation";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="min-h-screen flex flex-col text-slate-200 font-sans bg-black">
-      <div className="flex-1 flex">
+    <div className="flex flex-col h-screen max-h-screen font-sans bg-black text-slate-200">
+      <div className="flex flex-1 h-[calc(100%-88px)]">
         <Navigation />
-        <div className="w-full bg-slate-950 flex flex-col">
+        <div className="w-full bg-slate-950">
           <header className="p-2">Header</header>
           <main className="flex-1 p-2">
             <Component {...pageProps} />
@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </div>
 
       <footer className="p-4">
-        <div className="h-14 flex items-center justify-between">
+        <div className="flex items-center justify-between h-14">
           <p>Footer</p>
         </div>
       </footer>
