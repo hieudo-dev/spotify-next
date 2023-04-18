@@ -1,8 +1,12 @@
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import ChevronLeftIcon from "../public/icons/chevron-left.svg";
 import ChevronRightIcon from "../public/icons/chevron-right.svg";
 
 export default function Header() {
+  const { data: session } = useSession();
+  if (!session) return null;
+
   return (
     <header className="flex justify-between px-8 py-4">
       <div className="flex gap-4">
@@ -23,13 +27,13 @@ export default function Header() {
       </div>
       <div className="flex p-[2px] items-center pr-2 bg-gray-800 rounded-full">
         <Image
-          src="https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=1787809214777892&height=300&width=300&ext=1684155478&hash=AeSAtMJwfPNyDC1oFpA"
+          src={session.user.image}
           height={28}
           width={28}
-          alt="Hieu"
+          alt={session.user.name}
           className="mr-2 rounded-full"
         />
-        <p className="text-sm">Hieu</p>
+        <p className="text-sm">{session.user.name}</p>
       </div>
     </header>
   );
