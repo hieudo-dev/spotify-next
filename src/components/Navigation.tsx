@@ -64,10 +64,7 @@ export default function Navigation() {
     queryKey: ["playlists", session?.user.id, session?.accessToken],
     queryFn: async function () {
       return session
-        ? await getPlaylists({
-            accessToken: session.accessToken,
-            id: session.user.id,
-          })
+        ? await getPlaylists({ accessToken: session.accessToken })
         : null;
     },
   });
