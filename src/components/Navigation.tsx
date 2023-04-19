@@ -1,5 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useMemo } from "react";
 import AddIcon from "~assets/icons/add.svg";
 import BookmarkIcon from "~assets/icons/bookmark.svg";
 import HeartIcon from "~assets/icons/heart.svg";
@@ -7,15 +10,10 @@ import HomeIcon from "~assets/icons/home.svg";
 import LibraryIcon from "~assets/icons/library.svg";
 import SearchIcon from "~assets/icons/search.svg";
 import SpotifyLogo from "~assets/icons/spotify.svg";
+import { getPlaylists } from "~utils/api";
 
 export default function Navigation() {
   const router = useRouter();
-  const playlists = Array.from(Array(20).keys()).map((_, index) => ({
-    id: index,
-    name: "Your Top Songs 2022 " + (index + 1),
-    description: "New music for you",
-  }));
-
   const links = useMemo(
     () => [
       {
@@ -61,8 +59,21 @@ export default function Navigation() {
     []
   );
 
+  const { data: session } = useSession();
+  const { data: playlists, isLoading } = useQuery({
+    queryKey: ["playlists", session?.user.id, session?.accessToken],
+    queryFn: async function () {
+      return session
+        ? await getPlaylists({
+            accessToken: session.accessToken,
+            id: session.user.id,
+          })
+        : null;
+    },
+  });
+
   return (
-    <nav className="flex flex-col pt-6 b-white w-80">
+    <nav className="flex flex-col max-w-[256px] pt-6 b-white min-w-[256px]">
       <a className="block mx-6 mb-6 text-white" href="/">
         <SpotifyLogo className="h-[50px] w-40" />
       </a>
@@ -111,14 +122,16 @@ export default function Navigation() {
 
       <div className="flex-1 p-2 overflow-auto scrollbar">
         <ul>
-          {playlists.map(({ id, name, description }) => (
-            <li
-              key={id}
-              className="px-4 py-2 text-sm font-light transition-opacity opacity-70 hover:opacity-100"
-            >
-              {name}
-            </li>
-          ))}
+          {isLoading || !playlists?.items
+            ? null
+            : playlists.items.map(({ id, name }) => (
+                <li
+                  key={id}
+                  className="px-4 py-2 overflow-hidden text-sm font-light transition-opacity cursor-pointer whitespace-nowrap max-h-9 text-ellipsis opacity-70 hover:opacity-100"
+                >
+                  {name}
+                </li>
+              ))}
         </ul>
       </div>
     </nav>
