@@ -1,13 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
-import AddIcon from "../public/icons/add.svg";
-import BookmarkIcon from "../public/icons/bookmark.svg";
-import HeartIcon from "../public/icons/heart.svg";
-import HomeIcon from "../public/icons/home.svg";
-import LibraryIcon from "../public/icons/library.svg";
-import SearchIcon from "../public/icons/search.svg";
-import SpotifyLogo from "../public/icons/spotify.svg";
+import AddIcon from "~assets/icons/add.svg";
+import BookmarkIcon from "~assets/icons/bookmark.svg";
+import HeartIcon from "~assets/icons/heart.svg";
+import HomeIcon from "~assets/icons/home.svg";
+import LibraryIcon from "~assets/icons/library.svg";
+import SearchIcon from "~assets/icons/search.svg";
+import SpotifyLogo from "~assets/icons/spotify.svg";
 
 export default function Navigation() {
   const router = useRouter();

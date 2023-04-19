@@ -1,4 +1,18 @@
 {
   "presets": ["next/babel"],
-  "plugins": ["inline-react-svg"]
+  "plugins": [
+    "inline-react-svg",
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "~components": "./src/components",
+          "~layouts": "./src/layouts",
+          "~assets": "./src/assets",
+          "~utils": "./src/utils"
+        }
+      }
+    ]
+  ]
 }

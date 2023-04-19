@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import ChevronLeftIcon from "../public/icons/chevron-left.svg";
-import ChevronRightIcon from "../public/icons/chevron-right.svg";
+import ChevronLeftIcon from "~assets/icons/chevron-left.svg";
+import ChevronRightIcon from "~assets/icons/chevron-right.svg";
 
 export default function Header() {
   const { data: session } = useSession();
