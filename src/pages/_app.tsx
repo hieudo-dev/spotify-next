@@ -13,9 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className="flex flex-col h-screen max-h-screen font-sans bg-black text-slate-200">
           <div className="flex flex-1 h-[calc(100%-88px)]">
             <Navigation />
-            <div className="w-full bg-slate-950">
+            <div className="flex-1 overflow-x-hidden overflow-y-auto scrollbar bg-slate-950">
               <Header />
-              <main className="flex-1 p-2">
+              <main className="flex-1">
                 <Component {...pageProps} />
               </main>
             </div>
