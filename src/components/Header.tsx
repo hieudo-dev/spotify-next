@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import ChevronLeftIcon from "~assets/icons/chevron-left.svg";
 import ChevronRightIcon from "~assets/icons/chevron-right.svg";
@@ -33,7 +33,13 @@ export default function Header() {
           alt={session.user.name}
           className="mr-2 rounded-full"
         />
-        <p className="text-sm">{session.user.name}</p>
+        <p className="mr-6 text-sm">{session.user.name}</p>
+        <button type="button" onClick={() => signIn()}>
+          Sign in
+        </button>
+        <button type="button" onClick={() => signOut()}>
+          Sign out
+        </button>
       </div>
     </header>
   );
