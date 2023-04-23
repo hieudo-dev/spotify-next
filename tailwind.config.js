@@ -6,10 +6,13 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: 'CircularSP'
+      sans: "CircularSP",
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        "3xl": "0 4px 60px rgba(0,0,0,.5)",
+      },
+    },
   },
   plugins: [],
-}
-
+};

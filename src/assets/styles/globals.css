@@ -19,23 +19,34 @@
   font-style: normal;
 }
 
-.scrollbar::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: transparent;
-}
-
-.scrollbar::-webkit-scrollbar {
-  width: 6px;
-  background-color: transparent;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #555;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: transparent;
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #555;
+  }
+
+  .metadata {
+    @apply flex items-center leading-normal;
+  }
+
+  .metadata:not(:first-child)::before {
+    content: "•";
+    @apply mx-2 inline-block text-[8px] leading-4;
+  }
+}

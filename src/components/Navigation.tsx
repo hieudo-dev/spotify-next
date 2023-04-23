@@ -122,12 +122,13 @@ export default function Navigation() {
           {isLoading || !playlists?.items
             ? null
             : playlists.items.map(({ id, name }) => (
-                <li
+                <Link
                   key={id}
-                  className="px-4 py-2 overflow-hidden text-sm font-light transition-opacity cursor-pointer whitespace-nowrap max-h-9 text-ellipsis opacity-70 hover:opacity-100"
+                  href={`/playlists/${id}`}
+                  className="block px-4 py-2 overflow-hidden text-sm font-light transition-opacity cursor-pointer whitespace-nowrap max-h-9 text-ellipsis opacity-70 hover:opacity-100"
                 >
                   {name}
-                </li>
+                </Link>
               ))}
         </ul>
       </div>

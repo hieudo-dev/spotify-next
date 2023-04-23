@@ -6,7 +6,9 @@
       "~components/*": ["src/components/*"],
       "~layouts/*": ["src/layouts/*"],
       "~assets/*": ["src/assets/*"],
-      "~utils/*": ["src/utils/*"]
+      "~utils/*": ["src/utils/*"],
+      "~types/*": ["src/types/*"],
+      "~types": ["src/types/index"]
     },
     "allowJs": true,
     "skipLibCheck": true,
