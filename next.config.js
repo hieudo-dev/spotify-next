@@ -6,6 +6,11 @@ module.exports = {
         hostname: 'platform-lookaside.fbsbx.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: '**.**',
+        port: '',
+      },
     ],
   },
 }
