@@ -4,7 +4,7 @@ import ChevronLeftIcon from "~assets/icons/chevron-left.svg";
 import ChevronRightIcon from "~assets/icons/chevron-right.svg";
 
 export default function Header() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   if (!session) return null;
 
   return (
@@ -25,7 +25,7 @@ export default function Header() {
           <ChevronRightIcon className="text-white" />
         </button>
       </div>
-      <div className="flex p-[2px] items-center pr-2 bg-gray-800 rounded-full">
+      <div className="text-sm flex p-[2px] items-center pr-2 bg-gray-800 rounded-full">
         <Image
           src={session.user.image}
           height={28}
@@ -33,13 +33,16 @@ export default function Header() {
           alt={session.user.name}
           className="mr-2 rounded-full"
         />
-        <p className="mr-6 text-sm">{session.user.name}</p>
-        <button type="button" onClick={() => signIn()}>
-          Sign in
-        </button>
-        <button type="button" onClick={() => signOut()}>
-          Sign out
-        </button>
+        <p>{session.user.name}</p>&nbsp;|&nbsp;
+        {status === "unauthenticated" ? (
+          <button type="button" onClick={() => signIn()}>
+            Sign in
+          </button>
+        ) : (
+          <button type="button" onClick={() => signOut()}>
+            Sign out
+          </button>
+        )}
       </div>
     </header>
   );
