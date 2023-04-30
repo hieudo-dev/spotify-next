@@ -3,6 +3,8 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import PlayIcon from "~assets/icons/play.svg";
+import TracksTable from "~components/TracksTable";
 import { getPlaylist } from "~utils/api";
 import { decodeURIs, msToEstimatedTime } from "~utils/functions";
 
@@ -29,8 +31,8 @@ export default function PlaylistDetail() {
   );
 
   return (
-    <section className="h-full">
-      <div className="flex items-end px-8 pt-4 pb-6">
+    <>
+      <section className="flex items-end px-8 pt-4 pb-6">
         <Image
           className="mr-6 shadow-3xl"
           src={playlist.images[0].url}
@@ -72,8 +74,18 @@ export default function PlaylistDetail() {
             ) : null}
           </div>
         </div>
+      </section>
+      <div className="backdrop-blur-3xl to-slate-950 to-[400px] from-slate-800 bg-gradient-to-b bg-opacity-10">
+        <div className="px-8 py-4">
+          <button
+            type="button"
+            className="transition-transform hover:scale-105"
+          >
+            <PlayIcon className="p-4 text-black bg-green-500 rounded-full w-14 h-14" />
+          </button>
+        </div>
+        <TracksTable playlist={playlist} />
       </div>
-      <div className="h-full backdrop-blur-3xl to-slate-950 from-slate-800 bg-gradient-to-b bg-opacity-10"></div>
-    </section>
+    </>
   );
 }

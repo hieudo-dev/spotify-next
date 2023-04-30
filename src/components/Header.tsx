@@ -8,7 +8,7 @@ export default function Header() {
   if (!session) return null;
 
   return (
-    <header className="sticky top-0 flex justify-between w-full px-8 py-4">
+    <header className="sticky top-0 z-10 flex justify-between w-full px-8 py-4">
       <div className="flex gap-4">
         <button
           type="button"
