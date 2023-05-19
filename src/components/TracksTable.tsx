@@ -4,18 +4,19 @@ import ClockIcon from "~assets/icons/clock.svg";
 import { decodeURIs, msToPlayTime } from "~utils/functions";
 
 export default function TracksTable({ playlist }) {
+  const tracks = playlist.tracks?.items ?? playlist.items;
   return (
-    <section className="grid pt-2 pb-16 text-slate-400 grid-cols-[auto_40%_repeat(3,minmax(0,1fr))] grid-rows-[24px_1px_minmax(0,1fr)] gap-2 items-center px-8">
+    <section className="grid pt-2 pb-16 text-slate-400 grid-cols-[auto_40%_repeat(2,minmax(0,1fr))_120px] grid-rows-[24px_1px_minmax(0,1fr)] gap-2 items-center px-8">
       <div className="[&>*]:sticky [&>*]:top-16 text-sm font-thin contents">
         <div className="px-4 text-center">#</div>
         <div>Title</div>
-        <div>Album</div>
-        <div>Date added</div>
-        <ClockIcon className="mr-6 place-self-end" />
+        <div className="px-4">Album</div>
+        <div className="px-4">Date added</div>
+        <ClockIcon className="mx-4 place-self-end" />
       </div>
       <div className="col-[1/-1] border-b-[1px] border-slate-700 border-solid sticky top-[94px]"></div>
 
-      {playlist.tracks.items.map(({ track, added_by, added_at }, index) => (
+      {tracks.map(({ track, added_by, added_at }, index) => (
         <div key={track.uri} className="text-sm font-thin cur contents">
           <td className="px-4 text-center">{index + 1}</td>
           <td>
@@ -45,11 +46,16 @@ export default function TracksTable({ playlist }) {
               </div>
             </div>
           </td>
-          <Link href={decodeURIs(track.album.uri)} className="hover:underline">
+          <Link
+            href={decodeURIs(track.album.uri)}
+            className="px-4 hover:underline"
+          >
             {track.album.name}
           </Link>
-          <div>{added_by.id ? new Date(added_at).toLocaleString() : ""}</div>
-          <div className="mr-6 place-self-end">
+          <div className="px-4">
+            {added_by?.id !== null ? new Date(added_at).toLocaleString() : ""}
+          </div>
+          <div className="mx-4 place-self-end">
             {msToPlayTime(track.duration_ms)}
           </div>
         </div>
