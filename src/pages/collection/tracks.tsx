@@ -1,8 +1,9 @@
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import PlayIcon from "~assets/icons/play.svg";
 import TracksTable from "~components/TracksTable";
 import { getSavedTracks } from "~utils/api";
 import { savedTracksMetadata } from "~utils/constants";
@@ -90,7 +91,10 @@ export default function LikedSongs() {
             type="button"
             className="transition-transform hover:scale-105"
           >
-            <PlayIcon className="p-4 text-black bg-green-500 rounded-full w-14 h-14" />
+            <FontAwesomeIcon
+              icon={faPlay}
+              className="w-5 h-5 p-4 text-black bg-green-500 rounded-full"
+            />
           </button>
         </div>
         <TracksTable playlist={playlist} />

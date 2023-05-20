@@ -1,7 +1,10 @@
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import ChevronLeftIcon from "~assets/icons/chevron-left.svg";
-import ChevronRightIcon from "~assets/icons/chevron-right.svg";
 
 export default function Header() {
   const { data: session, status } = useSession();
@@ -9,20 +12,20 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-10 flex justify-between w-full px-8 py-4">
-      <div className="flex gap-4">
+      <div className="flex gap-3">
         <button
           type="button"
-          className="p-2 bg-gray-800 rounded-full"
+          className="w-8 h-8 bg-gray-800 rounded-full"
           onClick={() => window.history.back()}
         >
-          <ChevronLeftIcon className="text-white" />
+          <FontAwesomeIcon icon={faChevronLeft} className="text-white" />
         </button>
         <button
           type="button"
-          className="p-2 bg-gray-800 rounded-full"
+          className="w-8 h-8 bg-gray-800 rounded-full"
           onClick={() => window.history.forward()}
         >
-          <ChevronRightIcon className="text-white" />
+          <FontAwesomeIcon icon={faChevronRight} className="text-white" />
         </button>
       </div>
       <div className="text-sm flex p-[2px] items-center pr-2 bg-gray-800 rounded-full">

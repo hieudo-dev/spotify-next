@@ -1,6 +1,7 @@
+import { faClock } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import ClockIcon from "~assets/icons/clock.svg";
 import { decodeURIs, msToPlayTime } from "~utils/functions";
 
 export default function TracksTable({ playlist }) {
@@ -12,7 +13,7 @@ export default function TracksTable({ playlist }) {
         <div>Title</div>
         <div className="px-4">Album</div>
         <div className="px-4">Date added</div>
-        <ClockIcon className="mx-4 place-self-end" />
+        <FontAwesomeIcon icon={faClock} className="mx-4 place-self-end" />
       </div>
       <div className="col-[1/-1] border-b-[1px] border-slate-700 border-solid sticky top-[94px]"></div>
 

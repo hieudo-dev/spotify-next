@@ -1,9 +1,14 @@
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import { AppProps } from "next/app";
 import "~assets/styles/globals.css";
 import Header from "~components/Header";
 import Navigation from "~components/Navigation";
+
+// Disables insertion of style tags into head. Reference: https://fontawesome.com/docs/web/use-with/react/use-with
+config.autoAddCss = false;
 
 const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
