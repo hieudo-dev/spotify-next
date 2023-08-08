@@ -18,6 +18,14 @@ export async function getPlaylist({ accessToken, id }): Promise<Playlist> {
   return res.json();
 }
 
+export async function getArtist({ accessToken, id }) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/artists/${id}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}
+
 export async function getSavedTracks({ accessToken }): Promise<Tracks> {
   const params = new URLSearchParams();
   params.set("limit", "50");
