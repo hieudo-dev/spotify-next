@@ -17,10 +17,44 @@ export async function getPlaylist({ accessToken, id }): Promise<Playlist> {
   );
   return res.json();
 }
+export async function getUserProfile({ accessToken }) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/me`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  return res.json();
+}
 
 export async function getArtist({ accessToken, id }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/artists/${id}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}
+
+export async function getTopTracks({ market, accessToken, id }) {
+  const params = new URLSearchParams();
+  params.set("market", market);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/artists/${id}/top-tracks?${params}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}
+
+export async function getAlbums({ accessToken, id }) {
+  const params = new URLSearchParams();
+  params.set("limit", "50");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/artists/${id}/albums?${params}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}
+
+export async function getRelatedArtists({ accessToken, id }) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/artists/${id}/related-artists`,
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
   return res.json();
