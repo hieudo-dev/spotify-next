@@ -17,6 +17,7 @@ import { msToPlayTime } from "~utils/functions";
 export default function PlaylistDetail() {
   const [topTracksLimit, setTopTracksLimit] = useState(5);
   const [albumsLimit, setAlbumsLimit] = useState(5);
+  const [reArtistLimit, setReArtistLimit] = useState(5);
   const router = useRouter();
   const { id } = router.query;
   const { data: session } = useSession();
@@ -76,6 +77,9 @@ export default function PlaylistDetail() {
   };
   const handleSeeMoreAlbums = () => {
     setAlbumsLimit((prev) => (prev === 5 ? 100 : 5));
+  };
+  const handleSeeMoreReArtists = () => {
+    setReArtistLimit((prev) => (prev === 5 ? 100 : 5));
   };
 
   return (
@@ -172,13 +176,13 @@ export default function PlaylistDetail() {
             </p>
             <button
               className="mt-2 text-sm text-gray-500 transition-colors hover:text-white"
-              onClick={handleSeeMoreAlbums}
+              onClick={handleSeeMoreReArtists}
             >
-              See {albumsLimit === 5 ? "more" : "less"}
+              See {reArtistLimit === 5 ? "more" : "less"}
             </button>
           </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-6">
-            {relatedArtists.artists.slice(0, albumsLimit).map((artist) => (
+            {relatedArtists.artists.slice(0, reArtistLimit).map((artist) => (
               <a className="p-4 bg-gray-400 rounded-md bg-opacity-10">
                 <Image
                   className="object-cover w-full mb-4 rounded-full aspect-square"
