@@ -19,8 +19,8 @@ export default function TracksTable({ playlist }) {
 
       {tracks.map(({ track, added_by, added_at }, index) => (
         <div key={track.uri} className="text-sm font-thin cur contents">
-          <td className="px-4 text-center">{index + 1}</td>
-          <td>
+          <div className="px-4 text-center">{index + 1}</div>
+          <div>
             <div className="flex items-center">
               <Image
                 src={track.album.images[0].url}
@@ -46,7 +46,7 @@ export default function TracksTable({ playlist }) {
                 </div>
               </div>
             </div>
-          </td>
+          </div>
           <Link
             href={decodeURIs(track.album.uri)}
             className="px-4 hover:underline"
