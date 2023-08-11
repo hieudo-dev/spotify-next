@@ -85,7 +85,7 @@ export default function LikedSongs() {
           </div>
         </div>
       </section>
-      <div className="backdrop-blur-3xl to-slate-950 to-[400px] from-slate-800 bg-gradient-to-b bg-opacity-10">
+      <div className="flex-1 backdrop-blur-3xl to-slate-950 to-[400px] from-slate-800 bg-gradient-to-b bg-opacity-10">
         <div className="px-8 py-4">
           <button
             type="button"

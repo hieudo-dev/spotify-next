@@ -25,7 +25,7 @@ export default function PlaylistDetail() {
   return (
     <>
       <TracksTableHeader playlist={playlist} />
-      <div className="backdrop-blur-3xl to-black to-[400px] from-gray-800 bg-gradient-to-b bg-opacity-10">
+      <div className="flex-1 backdrop-blur-3xl to-black to-[400px] from-gray-800 bg-gradient-to-b bg-opacity-10">
         <div className="px-8 py-4">
           <button
             type="button"
