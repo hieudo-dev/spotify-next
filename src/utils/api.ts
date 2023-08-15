@@ -69,3 +69,11 @@ export async function getSavedTracks({ accessToken }): Promise<Tracks> {
   );
   return res.json();
 }
+
+export async function getAlbum({ accessToken, id }) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/albums/${id}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}
