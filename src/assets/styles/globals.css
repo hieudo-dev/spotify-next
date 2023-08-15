@@ -56,4 +56,8 @@
     content: "•";
     @apply mx-2 inline-block text-[8px] leading-4;
   }
+
+  .media-card {
+    @apply cursor-pointer rounded-md bg-gray-400 bg-opacity-10 transition-all hover:scale-105 hover:bg-opacity-20;
+  }
 }

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import {
@@ -12,7 +13,7 @@ import {
   getTopTracks,
   getUserProfile,
 } from "~utils/api";
-import { msToPlayTime } from "~utils/functions";
+import { decodeURIs, msToPlayTime } from "~utils/functions";
 
 export default function PlaylistDetail() {
   const [topTracksLimit, setTopTracksLimit] = useState(5);
@@ -154,7 +155,10 @@ export default function PlaylistDetail() {
           </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-6 mb-10">
             {albums.items.slice(0, albumsLimit).map((album) => (
-              <a className="p-4 bg-gray-400 rounded-md bg-opacity-10">
+              <Link
+                href={decodeURIs(album.uri)}
+                className="p-4 transition-all media-card"
+              >
                 <Image
                   className="w-full mb-4 rounded-md"
                   src={album.images[0].url}
@@ -166,7 +170,7 @@ export default function PlaylistDetail() {
                 <p className="text-sm font-normal text-gray-500">
                   {album.release_date.split("-")[0]} • Album
                 </p>
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -183,7 +187,11 @@ export default function PlaylistDetail() {
           </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-6">
             {relatedArtists.artists.slice(0, reArtistLimit).map((artist) => (
-              <a className="p-4 bg-gray-400 rounded-md bg-opacity-10">
+              <Link
+                key={artist.id}
+                href={decodeURIs(artist.uri)}
+                className="p-4 media-card"
+              >
                 <Image
                   className="object-cover w-full mb-4 rounded-full aspect-square"
                   src={artist.images[0].url}
@@ -193,7 +201,7 @@ export default function PlaylistDetail() {
                 />
                 <p className="mb-1 truncate">{artist.name}</p>
                 <p className="text-sm font-normal text-gray-500">Artist</p>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
