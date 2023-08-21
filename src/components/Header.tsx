@@ -59,12 +59,12 @@ export default function Header() {
           <FontAwesomeIcon icon={faChevronRight} className="text-white" />
         </button>
       </div>
-      <div className="text-sm flex p-[2px] items-center pr-2 bg-gray-800 rounded-full">
+      <div className="text-sm flex p-4 items-center pr-2 bg-gray-800 rounded-full">
         <Image
-          src={session.user.image}
+          src={session?.user?.image}
           height={28}
           width={28}
-          alt={session.user.name}
+          alt={session?.user?.name}
           className="mr-2 rounded-full"
         />
         <p>{session.user.name}</p>&nbsp;|&nbsp;
