@@ -126,3 +126,5 @@ export enum TrackType {
 export interface VideoThumbnail {
   url: null;
 }
+
+export const HEADER_HEIGHT = 64;

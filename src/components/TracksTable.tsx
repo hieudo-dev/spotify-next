@@ -4,10 +4,10 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { HEADER_HEIGHT } from "~types";
 import { decodeURIs, msToPlayTime } from "~utils/functions";
 
 export default function TracksTable({ playlist }) {
-  const HEADER_HEIGHT = 64;
   const [headerSticky, setHeaderSticky] = useState(false);
   const tableHeaderRef = useRef(null);
   const tracks = useMemo(() => {
@@ -47,7 +47,7 @@ export default function TracksTable({ playlist }) {
       <div
         className={clsx(
           "[&>*]:sticky [&>*]:py-2 [&>*]:top-16 text-sm font-thin contents",
-          { "[&>*]:bg-gray-900": headerSticky }
+          { "[&>*]:bg-gray-800": headerSticky }
         )}
       >
         <div className="pr-4 pl-[calc(1em+32px)] text-center -ml-8">#</div>

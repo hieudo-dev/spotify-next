@@ -3,17 +3,45 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { HEADER_HEIGHT } from "~types";
 
 export default function Header() {
+  const headerRef = useRef(null);
+  const [opacity, setOpacity] = useState("0");
   const { data: session, status } = useSession();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const top = document.querySelector("main")?.scrollTop ?? 0;
+      const opacity = Math.min(
+        Math.floor(
+          (Math.max(top - HEADER_HEIGHT, 0) * 100) / (HEADER_HEIGHT * 3)
+        ),
+        100
+      );
+      setOpacity(opacity === 100 ? "1" : `.${opacity}`);
+    };
+    document.querySelector("main").addEventListener("scroll", handleScroll);
+
+    return () =>
+      document
+        .querySelector("main")
+        .removeEventListener("scroll", handleScroll);
+  });
+
   if (!session) return null;
 
   return (
     <header
-      id="header"
-      className="sticky top-0 z-10 flex justify-between w-full px-8 py-4"
+      ref={headerRef}
+      className={clsx(
+        "sticky top-0 z-10 flex justify-between w-full px-8 py-4",
+        `bg-gray-700/[${opacity}]`
+      )}
     >
       <div className="flex gap-3">
         <button

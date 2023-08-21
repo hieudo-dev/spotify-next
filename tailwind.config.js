@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
+
+const headerBgSafeList = [...[...Array(101).keys()].map(i => `bg-gray-700/[${i === 100 ? "1" : `.${i}`}]`)]
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  safelist: [
+    ...headerBgSafeList,
   ],
   theme: {
     fontFamily: {
