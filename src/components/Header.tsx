@@ -11,7 +11,10 @@ export default function Header() {
   if (!session) return null;
 
   return (
-    <header className="sticky top-0 z-10 flex justify-between w-full px-8 py-4">
+    <header
+      id="header"
+      className="sticky top-0 z-10 flex justify-between w-full px-8 py-4"
+    >
       <div className="flex gap-3">
         <button
           type="button"

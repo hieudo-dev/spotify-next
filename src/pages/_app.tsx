@@ -18,10 +18,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <div className="flex flex-col h-screen max-h-screen font-sans bg-black text-slate-200">
           <div className="flex flex-1 h-[calc(100%-88px)]">
             <Navigation />
-            <div className="flex flex-col flex-1 overflow-x-hidden overflow-y-auto bg-gray-700 scrollbar">
+            <main className="flex flex-col flex-1 overflow-x-hidden overflow-y-auto bg-gray-700 scrollbar">
               <Header />
               <Component {...pageProps} />
-            </div>
+            </main>
           </div>
 
           <footer className="p-4">

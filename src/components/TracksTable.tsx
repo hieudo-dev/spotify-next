@@ -1,11 +1,15 @@
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { decodeURIs, msToPlayTime } from "~utils/functions";
 
 export default function TracksTable({ playlist }) {
+  const HEADER_HEIGHT = 64;
+  const [headerSticky, setHeaderSticky] = useState(false);
+  const tableHeaderRef = useRef(null);
   const tracks = useMemo(() => {
     const tracks = playlist.tracks?.items ?? playlist.items;
     return tracks.map(({ track, ...rest }) => ({ ...rest, ...track }));
@@ -17,25 +21,53 @@ export default function TracksTable({ playlist }) {
     ? "grid-cols-[auto_40%_repeat(2,minmax(0,1fr))_120px]"
     : "grid-cols-[80px_auto_120px]";
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const tableHeader = tableHeaderRef.current;
+      // Detect whether table header is sticking to the top of the screen or not
+      setHeaderSticky(
+        tableHeader?.getBoundingClientRect().top === HEADER_HEIGHT
+      );
+    };
+    document.querySelector("main").addEventListener("scroll", handleScroll);
+    return () => {
+      document
+        .querySelector("main")
+        .removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <section
       className={
-        "grid pt-2 pb-16 text-slate-400 grid-rows-[24px_1px_minmax(0,1fr)] gap-2 items-center px-8 " +
+        "grid pb-16 text-slate-400 grid-rows-[24px_calc(1px+1em)_minmax(0,1fr)] items-center px-8 " +
         tableColClasses
       }
     >
-      <div className="[&>*]:sticky [&>*]:top-16 text-sm font-thin contents">
-        <div className="px-4 text-center">#</div>
-        <div>Title</div>
+      <div
+        className={clsx(
+          "[&>*]:sticky [&>*]:py-2 [&>*]:top-16 text-sm font-thin contents",
+          { "[&>*]:bg-gray-900": headerSticky }
+        )}
+      >
+        <div className="pr-4 pl-[calc(1em+32px)] text-center -ml-8">#</div>
+        <div ref={tableHeaderRef}>Title</div>
         {!!hasAlbumData && (
           <>
             <div className="px-4">Album</div>
             <div className="px-4">Date added</div>
           </>
         )}
-        <FontAwesomeIcon icon={faClock} className="mx-4 place-self-end" />
+        <div className="relative -mr-8">
+          <FontAwesomeIcon icon={faClock} className="ml-[90px]" />
+        </div>
       </div>
-      <div className="col-[1/-1] border-b-[1px] border-slate-700 border-solid sticky top-[94px]"></div>
+      <div
+        className={clsx(
+          "col-[1/-1] my-2 border-b-[1px] border-slate-700 border-solid sticky top-[100px]",
+          { "-mx-8": headerSticky }
+        )}
+      ></div>
 
       {tracks.map((track, index) => (
         <div key={track.uri} className="text-sm font-thin cur contents">
