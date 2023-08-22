@@ -71,7 +71,7 @@ export default function TracksTable({ playlist }) {
 
       {tracks.map((track, index) => (
         <div key={track.uri} className="text-sm font-thin cur contents">
-          <div className="px-4 text-center">{index + 1}</div>
+          <div className="px-4 my-4 text-center">{index + 1}</div>
           <div>
             <div className="flex items-center">
               {!!hasAlbumData && (
