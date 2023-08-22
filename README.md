@@ -1,6 +1,6 @@
 # spotify-next
 
-Spotify-next is a clone of the Spotify web app that is built on top of Spotify's API. It is built with Next.js, Next-Auth, Tailwind CSS, and React Query.
+Spotify-next is a clone of the Spotify web app, powered by Spotify Web API. It's built with Next.js, Next-Auth, Tailwind CSS, and React Query.
 
 Disclaimer: This project is for educational purposes only.
 
