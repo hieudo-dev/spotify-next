@@ -97,3 +97,19 @@ export async function getNewReleases({ accessToken }) {
   );
   return res.json();
 }
+
+export async function transferPlayback({ deviceId, accessToken }) {
+  return fetch(`${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/me/player`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify({ play: true, device_ids: [deviceId] }),
+  });
+}
+
+export async function getCurrentlyPlaying({ accessToken }) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/me/player/currently-playing`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}

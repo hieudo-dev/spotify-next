@@ -6,6 +6,7 @@ import { AppProps } from "next/app";
 import "~assets/styles/globals.css";
 import Header from "~components/Header";
 import Navigation from "~components/Navigation";
+import { NowPlayingBar } from "~components/NowPlayingBar";
 
 // Disables insertion of style tags into head. Reference: https://fontawesome.com/docs/web/use-with/react/use-with
 config.autoAddCss = false;
@@ -23,12 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             </main>
           </div>
-
-          <footer className="p-4">
-            <div className="flex items-center justify-between h-14">
-              <p>Footer</p>
-            </div>
-          </footer>
+          <NowPlayingBar />
         </div>
       </QueryClientProvider>
     </SessionProvider>
