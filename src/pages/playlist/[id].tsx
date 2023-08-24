@@ -15,10 +15,19 @@ export default function PlaylistDetail() {
   const { data: session } = useSession();
   const { data: playlist } = useQuery({
     queryKey: ["playlist", id],
-    queryFn: () => {
-      return session
-        ? getPlaylist({ id, accessToken: session.accessToken })
-        : null;
+    queryFn: async () => {
+      if (session) {
+        const response = await getPlaylist({
+          id,
+          accessToken: session.accessToken,
+        });
+        response.tracks.items = response.tracks.items.filter(
+          (track) => !!track.track // track: null means it's no longer available, we filter it out
+        );
+        return response;
+      }
+
+      return null;
     },
   });
 
