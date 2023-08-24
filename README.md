@@ -9,7 +9,9 @@ Disclaimer: This project is for educational purposes only.
 - [ ] Play/Pause
 - [ ] Back/Forward status detection
 - [ ] Integrate React Query with SSR
-- [ ] Home page
+- [x] Home page
+  - [ ] "More from top artists" section
+  - [ ] _Show more_ support
 - [ ] Search page
 - [x] Now Playing bar
 - [x] Artist page
