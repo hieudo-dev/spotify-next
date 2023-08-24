@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { getPlaylists } from "~utils/api";
+import { decodeURIs } from "~utils/functions";
 
 export default function Navigation() {
   const router = useRouter();
@@ -130,10 +131,10 @@ export default function Navigation() {
         <ul>
           {isLoading || !playlists?.items
             ? null
-            : playlists.items.map(({ id, name }) => (
+            : playlists.items.map(({ id, uri, name }) => (
                 <Link
                   key={id}
-                  href={`/playlists/${id}`}
+                  href={decodeURIs(uri)}
                   className="block px-4 py-2 overflow-hidden text-sm font-light transition-opacity cursor-pointer whitespace-nowrap max-h-9 text-ellipsis opacity-70 hover:opacity-100"
                 >
                   {name}
