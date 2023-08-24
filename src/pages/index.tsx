@@ -63,7 +63,7 @@ export default function Home() {
                   alt={playlist.name}
                   width={80}
                   height={80}
-                />{" "}
+                />
                 <div className="flex p-4">
                   <p className="font-medium line-clamp-2 place-self-center">
                     {playlist.name}
