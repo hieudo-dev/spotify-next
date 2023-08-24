@@ -111,7 +111,11 @@ export default function TracksTable({ playlist }) {
               </Link>
               <div className="px-4">
                 {track.added_by?.id !== null
-                  ? new Date(track.added_at).toLocaleString()
+                  ? new Date(track.added_at).toLocaleString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
                   : ""}
               </div>
             </>

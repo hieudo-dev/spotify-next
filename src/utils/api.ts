@@ -77,3 +77,23 @@ export async function getAlbum({ accessToken, id }) {
   );
   return res.json();
 }
+
+export async function getFeaturedPlaylists({ accessToken }) {
+  const params = new URLSearchParams();
+  params.set("limit", "50");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/browse/featured-playlists?${params}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}
+
+export async function getNewReleases({ accessToken }) {
+  const params = new URLSearchParams();
+  params.set("limit", "50");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/browse/new-releases?${params}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } }
+  );
+  return res.json();
+}
