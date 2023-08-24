@@ -80,6 +80,7 @@ export default function Home() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(0,1fr))] gap-6 mb-10">
           {featuredPlaylists.playlists?.items.slice(0, 5).map((playlist) => (
             <Link
+              key={playlist.uri}
               href={decodeURIs(playlist.uri)}
               className="p-4 transition-all media-card"
             >
@@ -102,6 +103,7 @@ export default function Home() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(0,1fr))] gap-6 mb-10">
           {newReleases.albums?.items.slice(0, 5).map((album) => (
             <Link
+              key={album.uri}
               href={decodeURIs(album.uri)}
               className="p-4 transition-all media-card"
             >
