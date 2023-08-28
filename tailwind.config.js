@@ -12,6 +12,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: "CircularSP",
+      serif: "CircularSPTitle"
     },
     extend: {
       boxShadow: {
