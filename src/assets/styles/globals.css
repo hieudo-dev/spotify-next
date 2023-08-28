@@ -1,29 +1,20 @@
 @font-face {
   font-family: "CircularSP";
-  src: url("/fonts/CircularStd-Bold.otf") format("opentype");
+  src: url("/fonts/CircularSp-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: "CircularSP";
-  src: url("/fonts/CircularStd-Book.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "CircularSP";
-  src: url("/fonts/CircularStd-Medium.otf") format("opentype");
+  src: url("/fonts/CircularSp-Book.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "CircularSP";
-  src: url("/fonts/CircularStd-Light.otf") format("opentype");
-  font-weight: 300;
-  font-style: normal;
+  font-family: "CircularSPTitle";
+  src: url("/fonts/CircularSpTitle-Bold.woff2") format("woff2");
 }
 
 @tailwind base;
