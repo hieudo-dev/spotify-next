@@ -113,3 +113,13 @@ export async function getTrack({ accessToken, id }) {
   );
   return res.json();
 }
+
+export async function setVolume({ accessToken, volume }) {
+  return fetch(
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/me/player/volume?volume_percent=${volume}`,
+    {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${accessToken}` },
+    }
+  );
+}

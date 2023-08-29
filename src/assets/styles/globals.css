@@ -51,4 +51,28 @@
   .media-card {
     @apply cursor-pointer rounded-md bg-gray-400 bg-opacity-10 transition-all hover:scale-105 hover:bg-opacity-20;
   }
+
+  .slider {
+    -webkit-appearance: none;
+    -webkit-transition: 0.25s;
+    @apply h-1 rounded-md bg-gray-400 bg-opacity-60 outline-none transition-all;
+  }
+
+  .slider:hover::-webkit-slider-thumb {
+    display: block;
+  }
+
+  .slider::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+    @apply h-3 w-3 rounded-full bg-white;
+  }
+
+  .slider::-moz-range-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+    @apply h-3 w-3 rounded-full bg-white;
+  }
 }

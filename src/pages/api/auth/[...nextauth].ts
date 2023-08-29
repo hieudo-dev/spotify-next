@@ -9,6 +9,7 @@ const SCOPE = [
   "user-library-modify",
   "playlist-read-private",
   "user-top-read",
+  "user-library-read",
 ].join(" ");
 
 export const authOptions: AuthOptions = {

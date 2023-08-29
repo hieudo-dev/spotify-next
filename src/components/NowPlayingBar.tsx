@@ -5,14 +5,22 @@ import {
   faShuffle,
   faStepBackward,
   faStepForward,
+  faVolumeHigh,
+  faVolumeLow,
+  faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useThrottle } from "@uidotdev/usehooks";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getTrack, transferPlayback as transferPlaybackApi } from "~utils/api";
+import { useEffect, useMemo, useState } from "react";
+import {
+  getTrack,
+  setVolume as setVolumeApi,
+  transferPlayback as transferPlaybackApi,
+} from "~utils/api";
 import { decodeURIs } from "~utils/functions";
 
 export function NowPlayingBar() {
@@ -21,12 +29,20 @@ export function NowPlayingBar() {
   const [paused, setPaused] = useState(true);
   const [deviceId, setDeviceId] = useState(undefined);
   const [active, setActive] = useState(false);
+  const [localVolume, setLocalVolume] = useState(50);
+  const [lastVolume, setLastVolume] = useState(50);
+  const throttledLocalVolume = useThrottle(localVolume, 100);
   const { data: session } = useSession();
 
   const { mutate: transferPlayback } = useMutation({
     mutationFn: (deviceId) =>
       transferPlaybackApi({ accessToken: session?.accessToken, deviceId }),
   });
+  const { mutate: changeVolume } = useMutation({
+    mutationFn: (volume: number) =>
+      setVolumeApi({ accessToken: session?.accessToken, volume }),
+  });
+
   const { data: track } = useQuery({
     queryKey: ["track", trackId],
     queryFn: () => {
@@ -36,6 +52,12 @@ export function NowPlayingBar() {
     },
     keepPreviousData: true,
   });
+
+  const volumeIcon = useMemo(() => {
+    if (localVolume === 0) return faVolumeXmark;
+    if (localVolume > 0 && localVolume <= 50) return faVolumeLow;
+    if (localVolume > 50) return faVolumeHigh;
+  }, [localVolume]);
 
   useEffect(() => {
     const accessToken = session?.accessToken;
@@ -78,11 +100,28 @@ export function NowPlayingBar() {
     if (deviceId) transferPlayback(deviceId);
   }, [deviceId]);
 
+  useEffect(() => {
+    changeVolume(throttledLocalVolume);
+  }, [throttledLocalVolume]);
+
   const handleTogglePlay = () => {
     if (paused) {
       transferPlayback(deviceId);
     }
     player.togglePlay();
+  };
+
+  const handleChangeVolume = (value: string) => {
+    setLocalVolume(Number(value));
+  };
+
+  const handleToggleMute = () => {
+    if (localVolume === 0) {
+      setLocalVolume(lastVolume);
+    } else {
+      setLastVolume(localVolume);
+      setLocalVolume(0);
+    }
   };
 
   return (
@@ -146,7 +185,22 @@ export function NowPlayingBar() {
         </button>
       </div>
 
-      <div className="w-1/3"></div>
+      <div className="flex items-center justify-end w-1/3">
+        <div className="relative mr-8">
+          <button className="absolute left-0 -top-3" onClick={handleToggleMute}>
+            <FontAwesomeIcon icon={volumeIcon} className="h-4" />
+          </button>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={localVolume}
+          defaultValue={50}
+          className="w-20 accent-gray-200 slider"
+          onChange={(e) => handleChangeVolume(e.target.value)}
+        />
+      </div>
     </footer>
   );
 }
