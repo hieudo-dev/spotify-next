@@ -106,9 +106,9 @@ export async function transferPlayback({ deviceId, accessToken }) {
   });
 }
 
-export async function getCurrentlyPlaying({ accessToken }) {
+export async function getTrack({ accessToken, id }) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/me/player/currently-playing`,
+    `${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/tracks/${id}`,
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
   return res.json();
