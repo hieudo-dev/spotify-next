@@ -23,7 +23,7 @@ export default function PlaylistDetail() {
   const { id } = router.query;
   const { data: session } = useSession();
   const { data: artist } = useQuery({
-    queryKey: ["artist", id],
+    queryKey: ["artist", id, session?.accessToken],
     queryFn: () => {
       return session
         ? getArtist({ id, accessToken: session.accessToken })
@@ -32,7 +32,7 @@ export default function PlaylistDetail() {
   });
 
   const { data: userProfile } = useQuery({
-    queryKey: ["userProfile"],
+    queryKey: ["userProfile", session?.accessToken],
     queryFn: () => {
       return session
         ? getUserProfile({ accessToken: session.accessToken })
@@ -41,7 +41,7 @@ export default function PlaylistDetail() {
   });
 
   const { data: topTracks } = useQuery({
-    queryKey: ["topTracks", id, userProfile?.country],
+    queryKey: ["topTracks", id, userProfile?.country, session?.accessToken],
     queryFn: () => {
       return session && userProfile?.country
         ? getTopTracks({
@@ -54,7 +54,7 @@ export default function PlaylistDetail() {
   });
 
   const { data: albums } = useQuery({
-    queryKey: ["albums", id],
+    queryKey: ["albums", id, session?.accessToken],
     queryFn: () => {
       return session
         ? getAlbums({ id, accessToken: session.accessToken })
@@ -63,7 +63,7 @@ export default function PlaylistDetail() {
   });
 
   const { data: relatedArtists } = useQuery({
-    queryKey: ["relatedArtists", id],
+    queryKey: ["relatedArtists", id, session?.accessToken],
     queryFn: () => {
       return session
         ? getRelatedArtists({ id, accessToken: session.accessToken })

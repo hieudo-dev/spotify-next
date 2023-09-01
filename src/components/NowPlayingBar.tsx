@@ -44,9 +44,9 @@ export function NowPlayingBar() {
   });
 
   const { data: track } = useQuery({
-    queryKey: ["track", trackId],
+    queryKey: ["track", trackId, session?.accessToken],
     queryFn: () => {
-      return session
+      return session && trackId
         ? getTrack({ id: trackId, accessToken: session.accessToken })
         : null;
     },

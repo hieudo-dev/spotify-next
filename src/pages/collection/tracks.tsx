@@ -12,7 +12,7 @@ import { decodeURIs, msToEstimatedTime } from "~utils/functions";
 export default function LikedSongs() {
   const { data: session } = useSession();
   const { data: playlist } = useQuery({
-    queryKey: ["saved-tracks"],
+    queryKey: ["saved-tracks", session?.accessToken],
     queryFn: async () => {
       if (!session) {
         return null;

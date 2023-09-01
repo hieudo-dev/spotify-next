@@ -14,7 +14,7 @@ export default function AlbumDetails() {
   const router = useRouter();
   const { id } = router.query;
   const { data: album } = useQuery({
-    queryKey: ["album", id],
+    queryKey: ["album", id, session?.accessToken],
     queryFn: async () => {
       return session
         ? getAlbum({ id, accessToken: session.accessToken })

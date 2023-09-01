@@ -14,7 +14,7 @@ export default function PlaylistDetail() {
   const { id } = router.query;
   const { data: session } = useSession();
   const { data: playlist } = useQuery({
-    queryKey: ["playlist", id],
+    queryKey: ["playlist", id, session?.accessToken],
     queryFn: async () => {
       if (session) {
         const response = await getPlaylist({
