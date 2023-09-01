@@ -8,9 +8,14 @@ namespace NodeJS {
 
 declare module "next-auth" {
   interface Session {
+    error: string;
     accessToken: string;
     user: Session["user"] & {
       id: string;
     };
+  }
+
+  interface Account {
+    expires_in: number;
   }
 }
