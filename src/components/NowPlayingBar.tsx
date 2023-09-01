@@ -127,7 +127,7 @@ export function NowPlayingBar() {
   return (
     <footer className="flex items-center justify-between h-[80px] px-4">
       <div className="flex w-1/3">
-        {track && (
+        {track?.album && (
           <>
             <Image
               src={track.album.images[0].url}
@@ -196,7 +196,6 @@ export function NowPlayingBar() {
           min="0"
           max="100"
           value={localVolume}
-          defaultValue={50}
           className="w-20 accent-gray-200 slider"
           onChange={(e) => handleChangeVolume(e.target.value)}
         />
