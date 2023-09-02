@@ -123,3 +123,13 @@ export async function setVolume({ accessToken, volume }) {
     }
   );
 }
+
+export async function startPlayback({ accessToken, contextUri }) {
+  return fetch(`${process.env.NEXT_PUBLIC_SPOTIFY_BASE_API}/me/player/play`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${accessToken}` },
+    body: JSON.stringify({
+      context_uri: contextUri,
+    }),
+  });
+}

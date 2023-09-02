@@ -1,11 +1,10 @@
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import PlayButton from "~components/PlayButton";
 import {
   getAlbums,
   getArtist,
@@ -103,15 +102,7 @@ export default function PlaylistDetail() {
       </section>
       <div className="flex-1 backdrop-blur-3xl to-black to-[400px] from-gray-800 bg-gradient-to-b bg-opacity-10">
         <div className="px-8 py-4">
-          <button
-            type="button"
-            className="mb-6 transition-transform hover:scale-105"
-          >
-            <FontAwesomeIcon
-              icon={faPlay}
-              className="w-5 h-5 p-4 text-black bg-green-500 rounded-full"
-            />
-          </button>
+          <PlayButton wrapperClassName="mb-4" contextUri={artist.uri} />
           <div className="flex items-center justify-between">
             <p className="mb-4 text-2xl font-bold tracking-tight">Popular</p>
             <button

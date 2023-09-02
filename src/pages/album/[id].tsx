@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import PlayButton from "~components/PlayButton";
 import TracksTable from "~components/TracksTable";
 import { getAlbum } from "~utils/api";
 import { decodeURIs, msToEstimatedTime } from "~utils/functions";
@@ -79,17 +80,7 @@ export default function AlbumDetails() {
         </div>
       </section>
       <div className="flex-1 backdrop-blur-3xl to-slate-950 to-[400px] from-slate-800 bg-gradient-to-b bg-opacity-10">
-        <div className="px-8 py-4">
-          <button
-            type="button"
-            className="transition-transform hover:scale-105"
-          >
-            <FontAwesomeIcon
-              icon={faPlay}
-              className="w-5 h-5 p-4 text-black bg-green-500 rounded-full"
-            />
-          </button>
-        </div>
+        <PlayButton wrapperClassName="mx-8 my-4" contextUri={album.uri} />
         <TracksTable playlist={album} />
       </div>
     </>

@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
+import PlayButton from "~components/PlayButton";
 import { getFeaturedPlaylists, getNewReleases, getPlaylists } from "~utils/api";
 import { decodeURIs } from "~utils/functions";
 
@@ -55,7 +56,7 @@ export default function Home() {
               <Link
                 key={playlist.id}
                 href={decodeURIs(playlist.uri)}
-                className="flex h-20 overflow-hidden transition-colors duration-300 bg-white rounded-lg hover:bg-opacity-25 bg-opacity-10"
+                className="flex h-20 overflow-hidden transition-colors duration-300 bg-white rounded-lg hover:bg-opacity-25 [&:hover_svg]:opacity-100 bg-opacity-10"
               >
                 <Image
                   className="w-full max-w-fit aspect-square"
@@ -64,11 +65,16 @@ export default function Home() {
                   width={80}
                   height={80}
                 />
-                <div className="flex p-4">
+                <div className="flex flex-1 p-4">
                   <p className="font-medium line-clamp-2 place-self-center">
                     {playlist.name}
                   </p>
                 </div>
+                <PlayButton
+                  wrapperClassName="mr-2"
+                  className="opacity-0 scale-[80%] hover:scale-90"
+                  contextUri={playlist.uri}
+                />
               </Link>
             );
           })}
@@ -82,15 +88,22 @@ export default function Home() {
             <Link
               key={playlist.uri}
               href={decodeURIs(playlist.uri)}
-              className="p-4 transition-all media-card"
+              className="p-4 transition-all media-card [&:hover_svg]:opacity-100 [&:hover_svg]:translate-y-0"
             >
-              <Image
-                className="w-full mb-4 rounded-md"
-                src={playlist.images[0].url}
-                alt={playlist.name}
-                width={180}
-                height={180}
-              />
+              <div className="relative">
+                <Image
+                  className="w-full mb-4 rounded-md"
+                  src={playlist.images[0].url}
+                  alt={playlist.name}
+                  width={180}
+                  height={180}
+                />
+                <PlayButton
+                  wrapperClassName="absolute bottom-0 right-0"
+                  className="opacity-0 scale-[80%] hover:scale-90 translate-y-2"
+                  contextUri={playlist.uri}
+                />
+              </div>
               <p className="mb-1 truncate">{playlist.name}</p>
               <p className="text-sm font-normal text-gray-400 line-clamp-2">
                 {playlist.description}
@@ -105,15 +118,22 @@ export default function Home() {
             <Link
               key={album.uri}
               href={decodeURIs(album.uri)}
-              className="p-4 transition-all media-card"
+              className="p-4 transition-all media-card [&:hover_svg]:opacity-100 [&:hover_svg]:translate-y-0"
             >
-              <Image
-                className="w-full mb-4 rounded-md"
-                src={album.images[0].url}
-                alt={album.name}
-                width={180}
-                height={180}
-              />
+              <div className="relative">
+                <Image
+                  className="w-full mb-4 rounded-md"
+                  src={album.images[0].url}
+                  alt={album.name}
+                  width={180}
+                  height={180}
+                />
+                <PlayButton
+                  wrapperClassName="absolute bottom-0 right-0"
+                  className="opacity-0 scale-[80%] hover:scale-90 translate-y-2"
+                  contextUri={album.uri}
+                />
+              </div>
               <p className="mb-1 truncate">{album.name}</p>
               <p className="text-sm font-normal text-gray-400 line-clamp-2">
                 {album.artists[0].name}

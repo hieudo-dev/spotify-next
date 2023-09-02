@@ -4,10 +4,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import PlayButton from "~components/PlayButton";
 import TracksTable from "~components/TracksTable";
 import { getSavedTracks } from "~utils/api";
 import { savedTracksMetadata } from "~utils/constants";
-import { decodeURIs, msToEstimatedTime } from "~utils/functions";
+import {
+  decodeURIs,
+  getLikedSongsURI,
+  msToEstimatedTime,
+} from "~utils/functions";
 
 export default function LikedSongs() {
   const { data: session } = useSession();
@@ -46,15 +51,9 @@ export default function LikedSongs() {
           height={224}
         />
         <div className="flex flex-col justify-end">
-          <p className="mb-4 text-sm capitalize">{playlist.type}</p>
+          <p className="mb-4 text-sm capitalize">Playlist</p>
           {/* TODO: Implement auto-scale font to fit 1 line */}
-          <h1 className="mb-6 text-5xl font-bold">{playlist.name}</h1>
-          <div
-            className="text-sm font-thin text-slate-300"
-            dangerouslySetInnerHTML={{
-              __html: decodeURIs(playlist.description),
-            }}
-          ></div>
+          <h1 className="mb-6 text-5xl font-bold">Liked Songs</h1>
           <div className="flex items-center pt-2 text-sm">
             <Image
               src={session.user.image}
@@ -86,17 +85,10 @@ export default function LikedSongs() {
         </div>
       </section>
       <div className="flex-1 backdrop-blur-3xl to-slate-950 to-[400px] from-slate-800 bg-gradient-to-b bg-opacity-10">
-        <div className="px-8 py-4">
-          <button
-            type="button"
-            className="transition-transform hover:scale-105"
-          >
-            <FontAwesomeIcon
-              icon={faPlay}
-              className="w-5 h-5 p-4 text-black bg-green-500 rounded-full"
-            />
-          </button>
-        </div>
+        <PlayButton
+          contextUri={getLikedSongsURI(session?.user)}
+          className="mx-8 my-4"
+        />
         <TracksTable playlist={playlist} />
       </div>
     </>
