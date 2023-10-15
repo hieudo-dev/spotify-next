@@ -39,9 +39,8 @@ $ yarn dev
 ## To-do
 
 - [x] Play/Pause
-- [ ] Integrate React Query with SSR
+- [x] Integrate React Query with SSR
 - [x] Home page
-- [ ] Search page
 - [x] Now Playing bar
 - [x] Artist page
 - [x] Playlist page
@@ -49,6 +48,7 @@ $ yarn dev
 - [x] Liked Songs page
 
 ## Nice-to-haves
+- [ ] Search page
 - [ ] "More from top artists" section
 - [ ] _Show more_ support
 - [ ] Back/Forward status detection
